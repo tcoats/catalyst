@@ -1,0 +1,26 @@
+{
+  "name": "catalyst",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "debug": "parcel index.html --out-dir docs",
+    "deploy": "parcel build index.html --public-url /catalyst/ --out-dir docs"
+  },
+  "repository": "git@github.com:tcoats/catalyst.git",
+  "author": "Thomas Coats <github@voodoolabs.net>",
+  "license": "MIT",
+  "dependencies": {
+    "injectinto": "^1.6.0",
+    "normalize.css": "^8.0.1",
+    "odo-hub": "^4.0.3",
+    "odo-route": "^1.7.1",
+    "odoql2": "^2.1.0",
+    "page": "^1.11.4",
+    "snabbdom": "^0.7.3",
+    "stylus": "^0.54.5"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
+}
