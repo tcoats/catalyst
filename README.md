@@ -1,1 +1,1 @@
-# catalyst
+# Mind Catalyst

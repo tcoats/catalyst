@@ -11,7 +11,9 @@
   "author": "Thomas Coats <github@voodoolabs.net>",
   "license": "MIT",
   "dependencies": {
+    "gray-matter": "^4.0.2",
     "injectinto": "^1.6.0",
+    "marked": "^0.6.2",
     "normalize.css": "^8.0.1",
     "odo-hub": "^4.0.3",
     "odo-route": "^1.7.1",

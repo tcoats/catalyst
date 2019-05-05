@@ -1,18 +1,24 @@
 @require "./node_modules/normalize.css/normalize.css"
 @require "./fonts/SourceSansPro.styl"
 
-$primary = #46413E
-$secondary = #AC9E96
-$brand-primary = #30C100
-$brand-secondary = #D91F37
-$subtle-border = #ddd
-$selected = #0097D6
-$danger = #FF2D2D
+$primary = #333333
+$secondary = #646464
+$tertiary = #808080
+$border = #D9D9D9
+
+$purple = #C693C6
+$blue = #6498CE
+$green = #98C892
+$orange = #FB9150
+$red = #EE5E64
+
 
 html, body
   margin 0
   padding 0
   font-family "Source Sans Pro", Calibri, Candara, Arial, sans-serif
+  color $primary
+  font-size 15px
 
 h1, h2, h3, h4, h5, h6
   font-weight lighter
@@ -20,3 +26,23 @@ h1, h2, h3, h4, h5, h6
 header
   h1
     text-transform uppercase
+    margin-left 20px
+
+.caption
+  margin 0 20px
+  padding 10px 0
+  color $tertiary
+  font-size 14px
+
+nav
+  margin 0 20px
+
+article
+  border 1px solid $border
+  border-left-width 3px
+  padding 0 20px 20px 20px
+  margin 0 20px
+  a
+    text-decoration none
+    border-bottom 2px solid $border
+    color inherit

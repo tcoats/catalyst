@@ -385,6 +385,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+  color: #333;
+  font-size: 15px;
 }
 h1,
 h2,
@@ -396,4 +398,25 @@ h6 {
 }
 header h1 {
   text-transform: uppercase;
+  margin-left: 20px;
+}
+.caption {
+  margin: 0 20px;
+  padding: 10px 0;
+  color: #808080;
+  font-size: 14px;
+}
+nav {
+  margin: 0 20px;
+}
+article {
+  border: 1px solid #d9d9d9;
+  border-left-width: 3px;
+  padding: 0 20px 20px 20px;
+  margin: 0 20px;
+}
+article a {
+  text-decoration: none;
+  border-bottom: 2px solid #d9d9d9;
+  color: inherit;
 }
