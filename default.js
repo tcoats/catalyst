@@ -11,6 +11,11 @@ route('/', (p) => {
   return { page: 'default' }
 })
 
+route('/test/', (p) => {
+  alert('test')
+  return { page: 'default' }
+})
+
 route('/catalyst/', (p) => {
   return { page: 'default' }
 })
@@ -20,9 +25,15 @@ inject('page:default', ql.component({
     return { }
   },
   render: (state, params, hub) => {
-    return h('div.wrapper', h('article', [
-      h('h1', 'Hello'),
-      h('p', 'Things')
-    ]))
+    return h('div.wrapper', [
+      h('header', [
+        h('h1', 'Mind Catalyst')
+      ]),
+      h('article', [
+        h('h1', 'Hello'),
+        h('p', 'Things'),
+        h('a', { attrs: { href: '/test/' } }, 'Test')
+      ])
+    ])
   }
 }))

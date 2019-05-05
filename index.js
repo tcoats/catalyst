@@ -2,6 +2,7 @@ import classes from './index.styl'
 
 // extension points
 require('./default')
+require('./error')
 
 // snabbdom
 const patch = require('snabbdom').init([
@@ -57,4 +58,4 @@ page('*', (e, next) => {
 for (let pod of inject.many('pod')) pod(hub, exe)
 
 // start relay
-page()
+page({ hashbang: true })
