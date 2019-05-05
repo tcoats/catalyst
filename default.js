@@ -17,6 +17,7 @@ route('/test/', (p) => {
 })
 
 route('/catalyst/', (p) => {
+  alert('www')
   return { page: 'default' }
 })
 
