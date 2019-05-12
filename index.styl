@@ -23,26 +23,64 @@ html, body
 h1, h2, h3, h4, h5, h6
   font-weight lighter
 
+ref(name)
+  unquote("[") + name + unquote("]")
+
+.wrapper
+  display grid
+  grid-template-columns ref(main) 1fr ref(nav) 250px
+  grid-template-rows ref(header) auto ref(article) 1fr ref(footer) 150px
+
 header
-  h1
+  grid-row header
+  grid-column main / nav
+
+article
+  grid-row article
+  grid-column main
+
+footer
+  grid-row footer
+  grid-column main / nav
+
+nav
+  grid-row article
+  grid-column nav
+
+header
+  .logo
     text-transform uppercase
     margin-left 20px
 
-.caption
+article > h1,
+nav > div > h2
   margin 0 20px
   padding 10px 0
   color $tertiary
   font-size 14px
 
-nav
-  margin 0 20px
-
-article
+article .content
   border 1px solid $border
   border-left-width 3px
   padding 0 20px 20px 20px
-  margin 0 20px
+  margin 0 0 0 20px
   a
     text-decoration none
     border-bottom 2px solid $border
     color inherit
+
+nav
+  ul
+    list-style-type none
+    padding 0 20px
+    margin 0 0 10px 0
+    li
+      padding 10px
+      margin 0
+      border 1px solid $border
+      border-left-width 3px
+      & + li
+        border-top none
+      a
+        color $secondary
+        text-decoration none

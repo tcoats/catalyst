@@ -5,60 +5,78 @@ const route = require('odo-route')
 const page = require('page')
 const matter = require('gray-matter')
 const marked = require('marked')
+const axios = require('axios')
+const slugify = (title) => title.replace(/ /g, '+')
+const unslugify = (title) => title.replace(/\+/g, ' ')
 
 inject('pod', (hub, exe) => {
+  let files = { }
+  const load = (title) => {
+    let url = location.href
+    if (location.hash.length > 0) url = url.slice(0, -location.hash.length)
+    url += `files/${title}.md`
+    return axios.get(url).then((result) => {
+      const file = matter(result.data)
+      if (Object.keys(file.data) == 0) return null
+      file.data.content = file.content
+      if (!files[title]) files[title] = file.data
+      return file.data
+    })
+  }
+  exe.use('files', () => Promise.resolve(files))
+  exe.use('file', (title) => load(title))
+  hub.on('unknown file', (params) => {
+
+  })
 })
 
 route('/', (p) => {
-  return { page: 'default' }
+  return { page: 'default', title: 'Dashboard' }
+})
+route('/:title/', (p) => {
+  return { page: 'default', title: p.params.title }
 })
 
 inject('page:default', ql.component({
   query: (state, params) => {
-    return { }
+    return {
+      files: ql.query('files'),
+      file: ql.query('file', params.title)
+    }
   },
   render: (state, params, hub) => {
-    const data = `---
-title: Business Analysis
-color: '#98C892'
-connections:
-  Next work skill:
-  - Profit and loss
+    if (!state.file)
+      return inject.one('page:error')(state, {
+        message: `/${params.title}/ not found`
+      })
 
-  Important thinking styles:
-  - Analytical
-  - Curiousity
-  - Methodical
-
-  Job titles:
-  - Business Analyst
-
-  Experiences:
-  - Implementing a CRM
----
-# Business Analysis
-
-Business analysis is the practice of enabling change in an organizational context, by defining needs and recommending solutions that deliver value to stakeholders.
-
-It is usually performed by [Business Analysts](/Business+Analyst/).
-
-https://google.com/`
-
-    const file = matter(data)
-    const content = marked(file.content)
+    const html = marked(state.file.content)
 
     return h('div.wrapper', [
       h('header', [
-        h('h1', 'Mind Catalyst')
+        h('h1.logo', 'Mind Catalyst')
       ]),
-      h('div.caption', file.data.title),
-      h('article', {
-        props: { innerHTML: content },
-        style: { 'border-left-color': file.data.color }
-      }),
-      h('nav', [
-        
-      ])
+      h('article', [
+        h('h1', params.title),
+        h('div.content', {
+          props: { innerHTML: html },
+          style: { 'border-left-color': state.file.color }
+        })
+      ]),
+      h('nav', Object.keys(state.file.connections).map(title => h('div', [
+        h('h2', title),
+        h('ul', state.file.connections[title].map(connection => {
+          if (!state.files[connection]) hub.emit('unknown file', connection)
+          return h('li', {
+            style: {
+              'border-left-color': state.files[connection]
+                ? state.files[connection].color
+                : '#D9D9D9'
+            }
+          },
+          h('a', { attrs: { href: `/${slugify(connection)}/` } }, connection))
+        }))
+      ])))
     ])
   }
 }))

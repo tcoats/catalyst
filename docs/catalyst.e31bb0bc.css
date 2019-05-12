@@ -396,27 +396,64 @@ h5,
 h6 {
   font-weight: lighter;
 }
-header h1 {
+.wrapper {
+  display: grid;
+  grid-template-columns: [main] 1fr [nav] 250px;
+  grid-template-rows: [header] auto [article] 1fr [footer] 150px;
+}
+header {
+  grid-row: header;
+  grid-column: main/nav;
+}
+article {
+  grid-row: article;
+  grid-column: main;
+}
+footer {
+  grid-row: footer;
+  grid-column: main/nav;
+}
+nav {
+  grid-row: article;
+  grid-column: nav;
+}
+header .logo {
   text-transform: uppercase;
   margin-left: 20px;
 }
-.caption {
+article > h1,
+nav > div > h2 {
   margin: 0 20px;
   padding: 10px 0;
   color: #808080;
   font-size: 14px;
 }
-nav {
-  margin: 0 20px;
-}
-article {
+article .content {
   border: 1px solid #d9d9d9;
   border-left-width: 3px;
   padding: 0 20px 20px 20px;
-  margin: 0 20px;
+  margin: 0 0 0 20px;
 }
-article a {
+article .content a {
   text-decoration: none;
   border-bottom: 2px solid #d9d9d9;
   color: inherit;
+}
+nav ul {
+  list-style-type: none;
+  padding: 0 20px;
+  margin: 0 0 10px 0;
+}
+nav ul li {
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #d9d9d9;
+  border-left-width: 3px;
+}
+nav ul li + li {
+  border-top: none;
+}
+nav ul li a {
+  color: #646464;
+  text-decoration: none;
 }
