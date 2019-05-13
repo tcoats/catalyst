@@ -12382,9 +12382,9 @@ inject('pod', function (hub, exe) {
   var files = {};
 
   var load = function load(title) {
-    var url = location.href;
-    if (location.hash.length > 0) url = url.slice(0, -location.hash.length);
-    url += "files/".concat(title, ".md");
+    // let url = location.href
+    // if (location.hash.length > 0) url = url.slice(0, -location.hash.length)
+    var url = "https://raw.githubusercontent.com/tcoats/catalyst/master/files/".concat(title, ".md");
     return axios.get(url).then(function (result) {
       var file = matter(result.data);
       if (Object.keys(file.data) == 0) return null;
@@ -12405,7 +12405,7 @@ inject('pod', function (hub, exe) {
 route('/', function (p) {
   return {
     page: 'default',
-    title: 'Dashboard'
+    title: 'Index'
   };
 });
 route('/:title/', function (p) {
@@ -13760,7 +13760,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59155" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65266" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -12,9 +12,9 @@ const unslugify = (title) => title.replace(/\+/g, ' ')
 inject('pod', (hub, exe) => {
   let files = { }
   const load = (title) => {
-    let url = location.href
-    if (location.hash.length > 0) url = url.slice(0, -location.hash.length)
-    url += `files/${title}.md`
+    // let url = location.href
+    // if (location.hash.length > 0) url = url.slice(0, -location.hash.length)
+    const url = `https://raw.githubusercontent.com/tcoats/catalyst/master/files/${title}.md`
     return axios.get(url).then((result) => {
       const file = matter(result.data)
       if (Object.keys(file.data) == 0) return null
@@ -31,7 +31,7 @@ inject('pod', (hub, exe) => {
 })
 
 route('/', (p) => {
-  return { page: 'default', title: 'Dashboard' }
+  return { page: 'default', title: 'Index' }
 })
 route('/:title/', (p) => {
   return { page: 'default', title: p.params.title }
