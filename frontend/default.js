@@ -89,7 +89,7 @@ inject('page:default', ql.component({
 
     return h('div.wrapper', [
       h('header', [
-        h('h1.logo', 'Mind Catalyst')
+        h('a.logo', { attrs: { href: 'https://tcoats.github.io/catalyst/' } }, 'Mind Catalyst')
       ]),
       h('article', [
         h('h1', params.title),
