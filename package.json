@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "debug": "parcel index.html --out-dir docs",
-    "deploy": "parcel build index.html --public-url /catalyst/ --out-dir docs"
+    "debug": "parcel frontend/index.html --out-dir docs",
+    "deploy": "parcel build frontend/index.html --public-url /catalyst/ --out-dir docs"
   },
   "repository": "git@github.com:tcoats/catalyst.git",
   "author": "Thomas Coats <github@voodoolabs.net>",

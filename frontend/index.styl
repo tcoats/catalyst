@@ -1,4 +1,4 @@
-@require "./node_modules/normalize.css/normalize.css"
+@require "../node_modules/normalize.css/normalize.css"
 @require "./fonts/SourceSansPro.styl"
 
 $primary = #333333
@@ -30,6 +30,8 @@ ref(name)
   display grid
   grid-template-columns ref(main) 1fr ref(nav) 250px
   grid-template-rows ref(header) auto ref(article) 1fr ref(footer) 150px
+  max-width 900px
+  margin 0 auto
 
 header
   grid-row header
