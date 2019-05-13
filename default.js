@@ -8,26 +8,45 @@ const marked = require('marked')
 const axios = require('axios')
 const slugify = (title) => title.replace(/ /g, '+')
 const unslugify = (title) => title.replace(/\+/g, ' ')
+const cache = {}
 
 inject('pod', (hub, exe) => {
-  let files = { }
   const load = (title) => {
-    // let url = location.href
-    // if (location.hash.length > 0) url = url.slice(0, -location.hash.length)
+    if (cache[title] !== undefined)
+      return Promise.resolve(cache[title])
     const url = `https://raw.githubusercontent.com/tcoats/catalyst/master/files/${title}.md`
     return axios.get(url).then((result) => {
       const file = matter(result.data)
       if (Object.keys(file.data) == 0) return null
       file.data.content = file.content
-      if (!files[title]) files[title] = file.data
+      file.data.title = title
+      cache[title] = file.data
       return file.data
     })
   }
-  exe.use('files', () => Promise.resolve(files))
+  exe.use('files', (title) => load(title).then((file) =>
+  {
+    const html = marked(file.content)
+    const files = {}
+    for (let a of Object.values(file.connections))
+      for (let f of a)
+        files[f] = true
+    delete files[file.title]
+    return Promise.all(Object.keys(files).map((title) =>
+        load(title).catch(() => {
+          cache[title] = null
+          return null
+        })))
+      .then((files) => {
+        const result = {}
+        result[file.title] = file
+        for (let f of files)
+          if (f != null)
+            result[f.title] = f
+        return result
+      })
+  }))
   exe.use('file', (title) => load(title))
-  hub.on('unknown file', (params) => {
-
-  })
 })
 
 route('/', (p) => {
@@ -40,7 +59,7 @@ route('/:title/', (p) => {
 inject('page:default', ql.component({
   query: (state, params) => {
     return {
-      files: ql.query('files'),
+      files: ql.query('files', params.title),
       file: ql.query('file', params.title)
     }
   },
@@ -65,9 +84,8 @@ inject('page:default', ql.component({
       ]),
       h('nav', Object.keys(state.file.connections).map(title => h('div', [
         h('h2', title),
-        h('ul', state.file.connections[title].map(connection => {
-          if (!state.files[connection]) hub.emit('unknown file', connection)
-          return h('li', {
+        h('ul', state.file.connections[title].map(connection =>
+          h('li', {
             style: {
               'border-left-color': state.files[connection]
                 ? state.files[connection].color
@@ -75,7 +93,7 @@ inject('page:default', ql.component({
             }
           },
           h('a', { attrs: { href: `/${slugify(connection)}/` } }, connection))
-        }))
+        ))
       ])))
     ])
   }

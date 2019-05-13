@@ -12378,29 +12378,95 @@ var unslugify = function unslugify(title) {
   return title.replace(/\+/g, ' ');
 };
 
+var cache = {};
 inject('pod', function (hub, exe) {
-  var files = {};
-
   var load = function load(title) {
-    // let url = location.href
-    // if (location.hash.length > 0) url = url.slice(0, -location.hash.length)
+    if (cache[title] !== undefined) return Promise.resolve(cache[title]);
     var url = "https://raw.githubusercontent.com/tcoats/catalyst/master/files/".concat(title, ".md");
     return axios.get(url).then(function (result) {
       var file = matter(result.data);
       if (Object.keys(file.data) == 0) return null;
       file.data.content = file.content;
-      if (!files[title]) files[title] = file.data;
+      file.data.title = title;
+      cache[title] = file.data;
       return file.data;
     });
   };
 
-  exe.use('files', function () {
-    return Promise.resolve(files);
+  exe.use('files', function (title) {
+    return load(title).then(function (file) {
+      var html = marked(file.content);
+      var files = {};
+
+      var _arr = Object.values(file.connections);
+
+      for (var _i = 0; _i < _arr.length; _i++) {
+        var a = _arr[_i];
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = a[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var f = _step2.value;
+            files[f] = true;
+          }
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+      }
+
+      delete files[file.title];
+      return Promise.all(Object.keys(files).map(function (title) {
+        return load(title).catch(function () {
+          cache[title] = null;
+          return null;
+        });
+      })).then(function (files) {
+        var result = {};
+        result[file.title] = file;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = files[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var f = _step.value;
+            if (f != null) result[f.title] = f;
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        return result;
+      });
+    });
   });
   exe.use('file', function (title) {
     return load(title);
   });
-  hub.on('unknown file', function (params) {});
 });
 route('/', function (p) {
   return {
@@ -12417,7 +12483,7 @@ route('/:title/', function (p) {
 inject('page:default', ql.component({
   query: function query(state, params) {
     return {
-      files: ql.query('files'),
+      files: ql.query('files', params.title),
       file: ql.query('file', params.title)
     };
   },
@@ -12435,7 +12501,6 @@ inject('page:default', ql.component({
       }
     })]), h('nav', Object.keys(state.file.connections).map(function (title) {
       return h('div', [h('h2', title), h('ul', state.file.connections[title].map(function (connection) {
-        if (!state.files[connection]) hub.emit('unknown file', connection);
         return h('li', {
           style: {
             'border-left-color': state.files[connection] ? state.files[connection].color : '#D9D9D9'
@@ -13760,7 +13825,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65266" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49184" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
