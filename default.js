@@ -76,7 +76,16 @@ inject('page:default', ql.component({
         message: `/${params.title}/ not found`
       })
 
-    const html = marked(state.file.content)
+    const renderer = new marked.Renderer()
+    const oldLink = renderer.link
+      renderer.link = (href, title, text) => {
+        if (href.match(/^\/[^/]+\/$/)) {
+          const title = unslugify(href.slice(1, -1))
+          if (state.files[title]) return `<a style="border-bottom-color: ${state.files[title].color}" href="${href}">${text}</a>`
+        }
+        return oldLink.call(renderer, href, title, text)
+      }
+    const html = marked(state.file.content, { renderer: renderer })
 
     return h('div.wrapper', [
       h('header', [

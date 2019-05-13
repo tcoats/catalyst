@@ -12501,7 +12501,22 @@ inject('page:default', ql.component({
     if (!state.file) return inject.one('page:error')(state, {
       message: "/".concat(params.title, "/ not found")
     });
-    var html = marked(state.file.content);
+    var renderer = new marked.Renderer();
+    var oldLink = renderer.link;
+
+    renderer.link = function (href, title, text) {
+      if (href.match(/^\/[^/]+\/$/)) {
+        var _title = unslugify(href.slice(1, -1));
+
+        if (state.files[_title]) return "<a style=\"border-bottom-color: ".concat(state.files[_title].color, "\" href=\"").concat(href, "\">").concat(text, "</a>");
+      }
+
+      return oldLink.call(renderer, href, title, text);
+    };
+
+    var html = marked(state.file.content, {
+      renderer: renderer
+    });
     return h('div.wrapper', [h('header', [h('h1.logo', 'Mind Catalyst')]), h('article', [h('h1', params.title), h('div.content', {
       props: {
         innerHTML: html
@@ -13835,7 +13850,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49380" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49597" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
