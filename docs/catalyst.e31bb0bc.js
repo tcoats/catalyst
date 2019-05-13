@@ -12395,8 +12395,18 @@ inject('pod', function (hub, exe) {
 
   exe.use('files', function (title) {
     return load(title).then(function (file) {
-      var html = marked(file.content);
       var files = {};
+      var renderer = new marked.Renderer();
+      var oldLink = renderer.link;
+
+      renderer.link = function (href, title, text) {
+        if (href.match(/^\/[^/]+\/$/)) files[unslugify(href.slice(1, -1))] = true;
+        return oldLink.call(renderer, href, title, text);
+      };
+
+      var html = marked(file.content, {
+        renderer: renderer
+      });
 
       var _arr = Object.values(file.connections);
 
@@ -13825,7 +13835,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49184" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49380" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

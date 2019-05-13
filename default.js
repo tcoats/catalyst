@@ -26,8 +26,15 @@ inject('pod', (hub, exe) => {
   }
   exe.use('files', (title) => load(title).then((file) =>
   {
-    const html = marked(file.content)
     const files = {}
+    const renderer = new marked.Renderer()
+    const oldLink = renderer.link
+    renderer.link = (href, title, text) => {
+      if (href.match(/^\/[^/]+\/$/))
+        files[unslugify(href.slice(1, -1))] = true
+      return oldLink.call(renderer, href, title, text)
+    }
+    const html = marked(file.content, { renderer: renderer })
     for (let a of Object.values(file.connections))
       for (let f of a)
         files[f] = true

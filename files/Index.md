@@ -5,3 +5,6 @@ connections:
   - Business Analysis
 ---
 # Dashboard
+
+[Journey](/Journey/)
+
