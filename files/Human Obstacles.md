@@ -17,4 +17,17 @@ connections:
 
 Words go here.
 
-If you want to link to things do it like this.
+If you want to link to things do it [like this](/Business+Analysis/).
+
+
+## Human Instincts:
+### Safety
+We are wired to stay comfortable and seek certainty. Are you moving?
+
+### Emotion
+
+### Bias
+
+### Belonging
+
+### Memory
