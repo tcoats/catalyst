@@ -1,5 +1,6 @@
 ---
 color: '#98C892'
+icon: '🦉'
 connections:
   Next work skill:
   - Profit and loss
