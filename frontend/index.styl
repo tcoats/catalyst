@@ -66,28 +66,43 @@ nav > div > h2
   color $tertiary
   font-size 14px
 
-article .content
-  border 1px solid $border
-  border-left-width 3px
-  padding 0 20px 20px 20px
-  margin 0 0 0 20px
-  a
-    text-decoration none
-    border-bottom 2px solid $border
-    color inherit
+article
+  position relative
+
+  .icon
+    position absolute
+    top 46px
+    right 10px
+    height 48px
+    width 48px
+    font-size 36px
+    line-height 48px
+    text-align center
+
+  .content
+    border 1px solid $border
+    border-left-width 3px
+    padding 0 20px 20px 20px
+    margin 0 0 0 20px
+    a
+      text-decoration none
+      border-bottom 2px solid $border
+      color inherit
 
 nav
   ul
     list-style-type none
     padding 0 20px
     margin 0 0 10px 0
-    li
-      padding 10px
-      margin 0
-      border 1px solid $border
-      border-left-width 3px
-      & + li
-        border-top none
-      a
-        color $secondary
-        text-decoration none
+  li
+    padding 10px
+    margin 0
+    border 1px solid $border
+    border-left-width 3px
+    & + li
+      border-top none
+    a
+      color $secondary
+      text-decoration none
+  .icon
+    padding-right 5px

@@ -93,6 +93,7 @@ inject('page:default', ql.component({
       ]),
       h('article', [
         h('h1', params.title),
+        state.file.icon ? h('div.icon', state.file.icon) : null,
         h('div.content', {
           props: { innerHTML: html },
           style: { 'border-left-color': state.file.color }
@@ -108,7 +109,10 @@ inject('page:default', ql.component({
                 : '#D9D9D9'
             }
           },
-          h('a', { attrs: { href: `/${slugify(connection)}/` } }, connection))
+          h('a', { attrs: { href: `/${slugify(connection)}/` } }, [
+            state.files[connection] && state.files[connection].icon ? h('span.icon', state.files[connection].icon) : null,
+            connection
+          ]))
         ))
       ])))
     ])
