@@ -1,10 +1,10 @@
 ---
 color: '#FB9150'
 connections:
-  Creating Our Future:
-  People, Culture, Community
-  Technical, Problem Solving
-  Practical Getting Work Done
+  (Creating Our Future)(/workroute/)
+  (People, Culture, Community)(/workroute/)
+  (Technical, Problem Solving)(/workroute/)
+  (Practical Getting Work Done)(/workroute/)
 
 ---
 
