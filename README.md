@@ -1,1 +1,1 @@
-# Mind Catalyst
+# Work Journeys
