@@ -1,9 +1,12 @@
 ---
 color: '#FB9150'
 connections:
-  Next work skill:
-  - Profit and loss
----
-# Journey
+  Creating Our Future:
+  People, Culture, Community
+  Technical, Problem Solving
+  Practical Getting Work Done
 
-Things and stuff
+---
+
+
+
