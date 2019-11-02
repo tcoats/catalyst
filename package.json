@@ -11,7 +11,7 @@
   "author": "Thomas Coats <github@voodoolabs.net>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "gray-matter": "^4.0.2",
     "injectinto": "^1.6.0",
     "marked": "^0.6.2",
