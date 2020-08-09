@@ -1,29 +1,51 @@
 {
   "name": "catalyst",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
+  "description": "Mind Catalyst",
   "main": "index.js",
   "scripts": {
-    "debug": "parcel frontend/index.html --out-dir docs",
-    "deploy": "parcel build frontend/index.html --public-url /catalyst/ --out-dir docs"
+    "dev": "cross-env NODE_ENV=development NODE_OPTIONS=\"--trace-warnings\" webpack-dev-server --config ./webpack.development.js",
+    "build": "cross-env NODE_ENV=production NODE_OPTIONS=\"--trace-warnings\" webpack --config ./webpack.production.js"
   },
-  "repository": "git@github.com:tcoats/catalyst.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcoats/catalyst.git"
+  },
   "author": "Thomas Coats <github@voodoolabs.net>",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "gray-matter": "^4.0.2",
-    "injectinto": "^1.6.0",
-    "marked": "^0.6.2",
-    "normalize.css": "^8.0.1",
-    "odo-hub": "^4.0.3",
-    "odo-route": "^1.7.1",
-    "odoql2": "^2.1.0",
-    "page": "^1.11.4",
-    "snabbdom": "^0.7.3",
-    "stylus": "^0.54.5"
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/tcoats/catalyst/issues"
   },
+  "homepage": "https://github.com/tcoats/catalyst#readme",
+  "dependencies": {},
   "devDependencies": {
-    "cssnano": "^4.1.10"
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "^7.11.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "css-loader": "^4.2.1",
+    "file-loader": "^6.0.0",
+    "gray-matter": "^4.0.2",
+    "html-webpack-plugin": "^4.3.0",
+    "marked": "^1.1.1",
+    "normalize.css": "^8.0.1",
+    "seacreature": "^2.3.1",
+    "style-loader": "^1.2.1",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^3.0.2",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4",
+    "vue-hyperscript-terse": "^1.0.0",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.11",
+    "vuex": "^3.5.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^5.1.1"
   }
 }

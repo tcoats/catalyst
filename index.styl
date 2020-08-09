@@ -1,0 +1,108 @@
+@require "./node_modules/normalize.css/normalize.css"
+@require "./fonts/SourceSansPro.styl"
+
+$primary = #333333
+$secondary = #646464
+$tertiary = #808080
+$border = #D9D9D9
+
+$purple = #C693C6
+$blue = #6498CE
+$green = #98C892
+$orange = #FB9150
+$red = #EE5E64
+
+
+html, body
+  margin 0
+  padding 0
+  font-family "Source Sans Pro", Calibri, Candara, Arial, sans-serif
+  color $primary
+  font-size 15px
+
+h1, h2, h3, h4, h5, h6
+  font-weight lighter
+
+ref(name)
+  unquote("[") + name + unquote("]")
+
+.wrapper
+  display grid
+  grid-template-columns ref(main) 1fr ref(nav) 250px
+  grid-template-rows ref(header) auto ref(article) 1fr ref(footer) 150px
+  max-width 900px
+  margin 0 auto
+
+header
+  grid-row header
+  grid-column main / nav
+
+article
+  grid-row article
+  grid-column main
+
+footer
+  grid-row footer
+  grid-column main / nav
+
+nav
+  grid-row article
+  grid-column nav
+
+header .logo
+  text-transform uppercase
+  margin-left 20px
+  color inherit
+  font-weight lighter
+  font-size 30px
+  padding 20px 0
+  display block
+  text-decoration none
+
+article > h1,
+nav > div > h2
+  margin 0 20px
+  padding 10px 0
+  color $tertiary
+  font-size 14px
+
+article
+  position relative
+
+  .icon
+    position absolute
+    top 46px
+    right 10px
+    height 48px
+    width 48px
+    font-size 36px
+    line-height 48px
+    text-align center
+
+  .content
+    border 1px solid $border
+    border-left-width 3px
+    padding 0 20px 20px 20px
+    margin 0 0 0 20px
+    a
+      text-decoration none
+      border-bottom 2px solid $border
+      color inherit
+
+nav
+  ul
+    list-style-type none
+    padding 0 20px
+    margin 0 0 10px 0
+  li
+    padding 10px
+    margin 0
+    border 1px solid $border
+    border-left-width 3px
+    & + li
+      border-top none
+    a
+      color $secondary
+      text-decoration none
+  .icon
+    padding-right 5px
