@@ -19,7 +19,7 @@ connections:
 
 Words go here.
 
-If you want to link to things do it [like this](/Business-Analysis/).
+If you want to link to things do it [like this](Business-Analysis).
 
 
 ## Human Instincts:

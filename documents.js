@@ -4,7 +4,7 @@ import marked from 'marked'
 import { unslugify, classify } from './lib/slug'
 
 const load = async title => {
-  const res = await fetch(`./files/${title}.md`)
+  const res = await fetch(`https://raw.githubusercontent.com/tcoats/catalyst/master/files/${title}.md`)
   if (!res.ok) throw '404'
   const { data, content } = matter(await res.text())
   return { title, data, content }
