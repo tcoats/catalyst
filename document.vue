@@ -10,8 +10,7 @@ export default {
   components: {
   },
   async mounted() {
-    console.log('load here')
-    // await this.$store.dispatch('analytics/metocean_load')
+    await this.$store.dispatch('documents/load', this.$attrs.title)
     this.is_loaded = true
   },
   data() {

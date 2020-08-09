@@ -1,2 +1,4 @@
 import './index.styl'
-import './plumbing'
+import './routes'
+import './documents'
+import './lib/plumbing'
