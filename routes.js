@@ -1,8 +1,6 @@
 import inject from 'seacreature/lib/inject'
 import document from './document.vue'
-
-const slugify = title => title.replace(/ /g, '-')
-const unslugify = title => title.replace(/\-/g, ' ')
+import { unslugify } from './lib/slug'
 
 inject('route', {
   path: '/',
