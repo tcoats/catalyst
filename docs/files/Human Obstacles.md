@@ -1,9 +1,8 @@
 ---
-color: #4265f4
+color: '#4265f4'
 icon: '🦉'
 connections:
-  Human Instincts: The Game Changers
-  (what can go possibly wrong)
+  Human Instincts The Game Changers (what can go possibly wrong):
   - Staying safe
   - Emotion
   - Wired for Bias
@@ -20,7 +19,7 @@ connections:
 
 Words go here.
 
-If you want to link to things do it [like this](/Business+Analysis/).
+If you want to link to things do it [like this](/Business-Analysis/).
 
 
 ## Human Instincts:
@@ -41,6 +40,6 @@ Our memory fades.  Have you repeating experiences to learn more?
 ###Over Confidence
 Our natural approach is to operate with confidence over realism.  Have you done the slow thinking?
 
-### Limited Energy 
+### Limited Energy
 Our brains have limited energy.  Does this work activity spark or dim your energy?
 

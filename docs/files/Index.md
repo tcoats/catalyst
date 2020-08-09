@@ -6,8 +6,8 @@ connections:
 ---
 # Dashboard
 
-[Journey](/Journey/)
+[Journey](Journey)
 
-[Human Obstacles](/Human+Obstacles/)
+[Human Obstacles](Human-Obstacles)
 
 [google](https://google.com/)

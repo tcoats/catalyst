@@ -20,8 +20,8 @@ connections:
 
 Business analysis is the practice of enabling change in an organizational context, by defining needs and recommending solutions that deliver value to stakeholders.
 
-[Dashboard](/Index/)
+[Dashboard](Index)
 
-It is usually performed by [Business Analysts](/Business+Analyst/).
+It is usually performed by [Business Analysts](Business-Analysis).
 
 https://google.com/

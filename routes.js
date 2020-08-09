@@ -1,5 +1,4 @@
 import inject from 'seacreature/lib/inject'
-import document from './document.vue'
 import { unslugify } from './lib/slug'
 
 inject('route', {
